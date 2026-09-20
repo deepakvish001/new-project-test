@@ -58,6 +58,10 @@ on WhatsApp.
 
 Database schema: [`db/schema.sql`](db/schema.sql)
 
+**Phase 0 field kit** — [`gtm/`](gtm/): discovery call script, cluster outreach list,
+concierge pilot playbook, CA channel pitch, and the call log template. Start there, not in
+`docs/`.
+
 ## Status
 
 **Pre-validation.** No code yet, and none should be written until the concierge pilots in
