@@ -1,9 +1,9 @@
 import fc from "fast-check";
 import { describe, expect, it } from "vitest";
-import { canSendAt, decide, nextSendWindow } from "../src/decide.js";
-import { dayIndex, fromDayIndex, instantAt } from "../src/ist.js";
-import type { LadderInput, OrgPolicy, PromiseRecord } from "../src/types.js";
-import { DEFAULT_POLICY, D } from "./fixtures.js";
+import { canSendAt, decide, nextSendWindow } from "../src/decide";
+import { dayIndex, fromDayIndex, instantAt } from "../src/ist";
+import type { LadderInput, OrgPolicy, PromiseRecord } from "../src/types";
+import { DEFAULT_POLICY, D } from "./fixtures";
 
 /** Arbitraries over the realistic input space, not the whole type space. */
 
@@ -141,7 +141,7 @@ describe("safety invariants — these must hold for every possible input", () =>
   it("always schedules a WAIT strictly in the future or at the pause instant", () => {
     fc.assert(fc.property(arbInput, arbInstant, (i, now) => {
       const d = decide(i, now);
-      if (d.action === "WAIT" && d.reason === "quiet_hours") {
+      if (d.action === "WAIT" && (d.reason === "quiet_hours" || d.reason === "weekend")) {
         expect(d.until.getTime()).toBeGreaterThan(now.getTime());
       }
     }), RUNS);

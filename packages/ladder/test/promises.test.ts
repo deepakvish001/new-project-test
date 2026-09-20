@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { decide, MAX_PROMISE_PAUSES_PER_RUNG } from "../src/decide.js";
-import { at, D, input, promise } from "./fixtures.js";
+import { decide, MAX_PROMISE_PAUSES_PER_RUNG } from "../src/decide";
+import { at, D, input, promise } from "./fixtures";
 
 /**
  * Guard 8. The highest-value behaviour in the product: a buyer who said "20th ko de dunga"

@@ -8,14 +8,14 @@ import {
   isQuietHour,
   isWeekend,
   type IstDate,
-} from "./ist.js";
+} from "./ist";
 import type {
   LadderDecision,
   LadderInput,
   MessageVariant,
   OrgPolicy,
   PromiseRecord,
-} from "./types.js";
+} from "./types";
 
 /**
  * A broken promise accelerates the ladder by one rung, capped so that a buyer who breaks
@@ -132,7 +132,10 @@ export function decide(input: LadderInput, now: Date): LadderDecision {
   // 12. Quiet hours and weekends only delay a send — which is why they sit below the
   //     guards that stop one, and below the approval request the owner needs to see.
   if (!canSendAt(now, policy)) {
-    return { action: "WAIT", until: nextSendWindow(now, policy), reason: "quiet_hours" };
+    // Distinct reasons: "it is 2am" and "it is Sunday" read very differently in a digest
+    // and in ladder_event, even though both only delay the send.
+    const reason = !policy.sendOnWeekends && isWeekend(now) ? "weekend" : "quiet_hours";
+    return { action: "WAIT", until: nextSendWindow(now, policy), reason };
   }
 
   // 13. Send.

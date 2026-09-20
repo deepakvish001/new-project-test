@@ -21,6 +21,19 @@ jobs:
       - name: Test with coverage thresholds
         run: npm run coverage --workspace=@bakaya/ladder
 
+  legal:
+    name: packages/legal
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck --workspace=@bakaya/legal
+      - run: npm test --workspace=@bakaya/legal
+
   schema:
     name: db/schema.sql
     runs-on: ubuntu-latest

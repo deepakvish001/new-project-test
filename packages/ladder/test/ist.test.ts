@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   addDays, dateOfInstant, dayIndex, dayIndexOfInstant, daysSince, fromDayIndex,
   hourOfInstant, instantAt, isQuietHour, isWeekend, istDate, weekdayOfInstant,
-} from "../src/ist.js";
+} from "../src/ist";
 
 describe("istDate", () => {
   it("accepts a real date", () => {

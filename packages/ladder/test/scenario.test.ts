@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { decide } from "../src/decide.js";
-import type { LadderInput, PromiseRecord } from "../src/types.js";
-import { at, D, input, promise } from "./fixtures.js";
+import { decide } from "../src/decide";
+import type { LadderInput, PromiseRecord } from "../src/types";
+import { at, D, input, promise } from "./fixtures";
 
 /**
  * The worked example from docs/04-collections-engine.md §7, replayed day by day.
@@ -28,7 +28,7 @@ describe("worked example — ₹4,20,000 invoice, 14 Oct 2026", () => {
     // default policy has sendOnWeekends: false, so the real behaviour is a deferral.
     // Found by this test; docs/04 §7 corrected to match.
     const d = decide(state, at("2026-10-11", 10));
-    expect(d).toMatchObject({ action: "WAIT", reason: "quiet_hours" });
+    expect(d).toMatchObject({ action: "WAIT", reason: "weekend" });
     if (d.action !== "WAIT") throw new Error("unreachable");
     expect(d.until).toEqual(at("2026-10-12", 9)); // Monday 09:00
   });

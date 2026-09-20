@@ -1,4 +1,4 @@
-import type { IstDate } from "./ist.js";
+import type { IstDate } from "./ist";
 
 export type InvoiceStatus =
   | "OPEN" | "PARTIALLY_PAID" | "PAID" | "DISPUTED" | "WRITTEN_OFF" | "ON_HOLD";
@@ -33,6 +33,7 @@ export type Reason =
   | "ladder_exhausted"
   | "needs_legal_approval"
   | "quiet_hours"
+  | "weekend"
   | "due_date_passed"
   | "promise_broken";
 

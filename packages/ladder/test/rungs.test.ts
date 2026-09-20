@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { decide, targetRung, templateId } from "../src/decide.js";
-import { at, D, input, policy, promise } from "./fixtures.js";
+import { decide, targetRung, templateId } from "../src/decide";
+import { at, D, input, policy, promise } from "./fixtures";
 
 const DUE = D("2026-10-14");
 

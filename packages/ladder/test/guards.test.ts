@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { decide } from "../src/decide.js";
-import { at, D, input, policy, promise } from "./fixtures.js";
+import { decide } from "../src/decide";
+import { at, D, input, policy, promise } from "./fixtures";
 
 /**
  * One test per guard: it fires when it should, AND it shadows the guard below it.
@@ -239,11 +239,17 @@ describe("guard 12 — quiet hours and weekends", () => {
     expect(d.until).toEqual(at("2026-10-30", 9));
   });
 
-  it("skips the weekend", () => {
-    const now = at("2026-10-31", 10); // Saturday
+  it("skips the weekend, and says so distinctly", () => {
+    const now = at("2026-10-31", 10); // Saturday, inside normal sending hours
     const d = decide(input(), now);
-    if (d.action !== "WAIT") throw new Error(`expected WAIT, got ${d.action}`);
+    expect(d).toMatchObject({ action: "WAIT", reason: "weekend" });
+    if (d.action !== "WAIT") throw new Error("unreachable");
     expect(d.until).toEqual(at("2026-11-02", 9)); // Monday
+  });
+
+  it("reports weekend, not quiet_hours, for a Sunday afternoon", () => {
+    const d = decide(input(), at("2026-11-01", 14));
+    expect(d).toMatchObject({ action: "WAIT", reason: "weekend" });
   });
 
   it("sends on a Saturday when the org allows weekends", () => {

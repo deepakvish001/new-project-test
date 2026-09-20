@@ -75,6 +75,7 @@ design — it encodes what matters more than what.
 11. targetRung > effectiveMaxAutoRung
         and no legalApprovedAt                      → REQUEST_APPROVAL
 12. now is inside quiet hours / weekend             → WAIT until next send window
+        (distinct reasons: `quiet_hours` vs `weekend`)
 13. otherwise                                       → SEND targetRung
 ```
 

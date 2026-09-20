@@ -166,6 +166,10 @@ CREATE TABLE promise (
   promised_date DATE NOT NULL,
   promised_paise BIGINT,                     -- NULL = full outstanding
   status        promise_status NOT NULL DEFAULT 'PENDING',
+  -- Which rung the ladder was on when this promise was made. The engine caps promise-
+  -- driven pauses at two per rung; without this column a buyer can re-promise forever
+  -- and the ladder never advances. See packages/ladder MAX_PROMISE_PAUSES_PER_RUNG.
+  created_at_rung SMALLINT NOT NULL DEFAULT 0,
   source_message_id UUID,                    -- the inbound_message it came from
   created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
   resolved_at   TIMESTAMPTZ

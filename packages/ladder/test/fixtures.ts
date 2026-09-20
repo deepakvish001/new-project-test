@@ -1,5 +1,5 @@
-import { instantAt, istDate, type IstDate } from "../src/ist.js";
-import type { LadderInput, OrgPolicy, PromiseRecord } from "../src/types.js";
+import { instantAt, istDate, type IstDate } from "../src/ist";
+import type { LadderInput, OrgPolicy, PromiseRecord } from "../src/types";
 
 export const D = istDate;
 
